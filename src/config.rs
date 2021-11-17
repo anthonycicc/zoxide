@@ -52,8 +52,14 @@ pub fn exclude_dirs() -> Result<Vec<Pattern>> {
     )
 }
 
+#[cfg(not(feature = "nofzf"))]
 pub fn fzf_opts() -> Option<OsString> {
     env::var_os("_ZO_FZF_OPTS")
+}
+
+#[cfg(feature = "nofzf")]
+pub fn fzf_opts() -> Option<OsString> {
+    env::var_os("_ZO_SK_OPTS")
 }
 
 pub fn maxage() -> Result<Rank> {
